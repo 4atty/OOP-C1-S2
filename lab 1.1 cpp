@@ -1,0 +1,67 @@
+#include "stdafx.h"
+#include <iostream>
+#include <math.h>
+#define PI 3.14159265
+
+using namespace std;
+
+class Coordinates{
+private:                
+    double X, Y, R, Angle;  
+
+public:
+	Coordinates();		
+    ~Coordinates();		
+    double GetData();
+    double PolarFinder();	
+};
+
+Coordinates::Coordinates(){			
+	cout << "Constructor !" << endl;
+}		
+Coordinates::~Coordinates(){		
+	cout << "Destructor !" << endl;
+}
+
+double Coordinates::GetData(){
+	cout << "Enter the Cartesian Coordiantes of a point (X,Y):" << endl;
+	cout << "X= ";
+	cin >> X;
+	cout << "Y= ";
+	cin >> Y;
+	return X, Y;
+}
+
+double Coordinates::PolarFinder(){
+	R = sqrt(X*X + Y*Y);
+	if (X>0 && Y>0)	//1 Quarter
+	{
+		Angle = atan2(Y, X) * 180/PI;
+	}
+		if (X<0 && Y>0)	//2 Quarter
+		{
+			Angle = atan2(Y, X) * 180/PI;
+		}
+			if (X<0 && Y<0)	//3 Quarter
+			{
+				Angle = atan2(Y, X) * 180/PI + 360;
+			}
+				if (X>0 && Y<0)	//4 Quarter
+				{
+					Angle = atan2(Y, X) * 180/PI + 360;
+				}
+	
+	cout << endl;
+	cout << "Polar coordinates are:" << endl;
+	cout << "R= " << R << endl;
+	cout << "Angle= " << Angle << endl;
+	return R, Angle;
+}
+
+void main(){
+    cout << "Lets find Polar Coordinates of a point!" << endl;
+    Coordinates Object;
+	Object.GetData();
+	Object.PolarFinder();
+	system("pause");	
+}
